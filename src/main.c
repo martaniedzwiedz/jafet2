@@ -7,6 +7,8 @@
 #include <errno.h>
 #include <stdio.h>
 #include <sys/mman.h>
+#include <string.h>
+#include <stdint-gcc.h>
 
 #define DSP_MAGIC		0x00
 #define DSP_VERSION		0x04
@@ -30,7 +32,7 @@ static const uint8_t *shm;
 static const char *shm_device;
 static unsigned long long shm_offset;
 static unsigned long shm_size;
-tatic const char *dsp_device = "/dev/zero";
+static const char *dsp_device = "/dev/zero";
 static unsigned long long dsp_offset=0x1000000;
 static int dsp_initialized;
 static unsigned int generation;
