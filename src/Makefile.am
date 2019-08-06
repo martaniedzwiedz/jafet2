@@ -1,6 +1,6 @@
 bin_PROGRAMS = jafet2
  
-jafet_SOURCES = jafet2.c
- 
-jafet.bin: jafet
+jafet2_SOURCES = jafet2.c
+
+jafet2.bin: jafet2
 	$(OBJCOPY) -O binary $< $@
