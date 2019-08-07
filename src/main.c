@@ -28,7 +28,7 @@
 
 #define DSP_MAGIC_VALUE		0x50750a00
 
-static const uint8_t *shm;
+static const u8 *shm;
 static const char *shm_device;
 static unsigned long long shm_offset;
 static unsigned long shm_size;
@@ -45,7 +45,7 @@ static int dspcomm_remap(unsigned long size);
 
 static int dsp_ready(void)
 {
-	uint32_t x;
+	u32 x;
 
 	x = readl(shm + DSP_MAGIC);
 	return x == DSP_MAGIC_VALUE;
@@ -54,7 +54,7 @@ static int dsp_ready(void)
 static int dsp_begin(void)
 {
 	int ret;
-	uint32_t x;
+	u32 x;
 
 	if (!dsp_initialized) {
 		if (!dsp_ready())
@@ -106,7 +106,7 @@ static int dsp_begin(void)
 
 static int dsp_end(void)
 {
-	uint32_t x;
+	u32 x;
 
 	x = readl(shm + DSP_GENERATION);
 	if (x == generation && dsp_initialized) {
@@ -119,7 +119,7 @@ static int dsp_end(void)
 
 static unsigned int dsp_seqnum(void)
 {
-	uint32_t x;
+	u32 x;
 
 	x = readl(shm + DSP_SEQNUM);
 	return x;
@@ -127,7 +127,7 @@ static unsigned int dsp_seqnum(void)
 
 static unsigned int dsp_first(void)
 {
-	uint32_t x;
+	u32 x;
 
 	x = readl(shm + DSP_FIRST);
 	return x;
@@ -135,7 +135,7 @@ static unsigned int dsp_first(void)
 
 static unsigned int dsp_igroup(void)
 {
-	uint32_t x;
+	u32 x;
 
 	x = readl(shm + DSP_IGROUP);
 	return x;
@@ -149,7 +149,7 @@ unsigned int dsp_sample_size(void)
 	return sample_size;
 }
 
-static const uint8_t *dsp_get_buffer(unsigned int seq)
+static const u8 *dsp_get_buffer(unsigned int seq)
 {
 	unsigned long offset;
 
@@ -161,7 +161,7 @@ static const uint8_t *dsp_get_buffer(unsigned int seq)
 void __copy_from_dsp(unsigned int seq, unsigned long offset, void *dst,
 		unsigned long count)
 {
-	const uint8_t *buffer = dsp_get_buffer(seq);
+	const u8 *buffer = dsp_get_buffer(seq);
 
 	memcpy_fromio(dst, buffer + offset, count);
 }
